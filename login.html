@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Recycle Life</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+        }
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-container h2 { margin-bottom: 20px; color: var(--primary-color); }
+        .back-link { display: block; margin-top: 20px; color: var(--secondary-color); text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Member Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="cta-btn" style="width: 100%;">Sign In</button>
+        </form>
+        <div id="response" style="margin-top: 15px; font-weight: bold;"></div>
+        
+        <p style="margin-top: 20px;">Don't have an account?</p>
+        <a href="/#contact" class="cta-btn" style="width: 100%; background: var(--secondary-color); padding: 12px 20px; font-size: 1rem;">Join the Movement</a>
+
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const responseDiv = document.getElementById('response');
+
+            responseDiv.innerText = 'Verifying...';
+            responseDiv.style.color = 'blue';
+
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    responseDiv.innerText = 'Success! Check your Gmail.';
+                    responseDiv.style.color = 'green';
+                } else {
+                    responseDiv.innerText = data.error || 'Login failed.';
+                    responseDiv.style.color = 'red';
+                }
+            } catch (error) {
+                responseDiv.innerText = 'Error connecting to server.';
+                responseDiv.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>

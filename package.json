@@ -1,0 +1,30 @@
+{
+  "name": "page-project-",
+  "version": "1.0.0",
+  "description": "**Recycle Life** is a responsive educational web application designed to promote recycling habits and propose community-driven solutions to environmental challenges. This project aligns with the ADSO requirements and follows freeCodeCamp web development standards.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshua-jaimes/Page-Project-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/joshua-jaimes/Page-Project-/issues"
+  },
+  "homepage": "https://github.com/joshua-jaimes/Page-Project-#readme",
+  "dependencies": {
+    "axios": "^1.15.0",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "start": "^5.1.0"
+  }
+}
